@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+//Import React Hooks
+import { useState }  from 'react';
+//Import all Components
+import MoleContainer from './Components/MoleContainer';
+
 
 function App() {
+  //Purpose: Keeps track of the user score
+  let [score,setScore] = useState(0);
+  //Purpose: Generates n mole containers
+  const createMoleHill = (n) =>
+  {
+    let hills = [];
+    for (let i=0; i<n; i++)
+    {
+      hills.push(<MoleContainer key={i} setScore={setScore} score={score}/>);
+    }
+    return(
+      hills
+    )
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>React a Mole</h1>
+      <h2> Current Score: {score} </h2>
+      <div className='MolesGameBoard'  style={{'width' : '30vw','display': 'grid', 'grid-template-columns': 'repeat(3, 1fr)'}}>
+        {createMoleHill(9)}
+      </div>
     </div>
-  );
+  )
 }
 
 export default App;
